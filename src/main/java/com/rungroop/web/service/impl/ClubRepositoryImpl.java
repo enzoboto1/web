@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.models.Club;
 import com.rungroop.web.repository.ClubRepository;
 import com.rungroop.web.service.ClubService;
 
+@Service
 public class ClubRepositoryImpl implements ClubService{
 
     @Autowired
