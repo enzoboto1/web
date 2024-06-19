@@ -1,7 +1,6 @@
 package com.rungroop.web.repository;
 
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.rungroop.web.models.Club;
 
