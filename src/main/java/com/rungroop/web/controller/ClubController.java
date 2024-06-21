@@ -9,6 +9,11 @@ import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.models.Club;
 import com.rungroop.web.service.ClubService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class ClubController {
@@ -32,6 +37,12 @@ public class ClubController {
         Club club = new Club();
         model.addAttribute("club", club);
         return "clubs-create";
+    }
+    
+    @PostMapping("/clubs/new")
+    public String saveClub(@ModelAttribute("club") Club club) {
+        clubService.saveClub(club);
+        return "redirect:/clubs";
     }
     
 }

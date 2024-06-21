@@ -31,5 +31,10 @@ public class ClubRepositoryImpl implements ClubService{
                         .updateOn(club.getUpdateOn())
                         .build();
     }
+
+    @Override
+    public Club saveClub(Club club) {
+        return clubRepository.save(club);
+    }
     
 }
