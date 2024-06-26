@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class ClubController {
     
@@ -71,5 +72,12 @@ public class ClubController {
         clubService.updateClub(clubDto);
         return "redirect:/clubs";
     }
+
+    @GetMapping("/clubs/{clubId}/delete")
+    public String deleteClub(@PathVariable("clubId") Long clubId) {
+        clubService.removeClub(clubId);
+        return "redirect:/clubs";
+    }
+    
     
 }
