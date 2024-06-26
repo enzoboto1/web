@@ -6,5 +6,7 @@ import com.rungroop.web.models.Club;
 
 public interface ClubService {
     public List<ClubDto> findAllClubs();
-    public Club saveClub(Club club); 
+    public Club saveClub(ClubDto club);
+    public ClubDto findClubById(Long clubId);
+    public void updateClub(ClubDto club); 
 }

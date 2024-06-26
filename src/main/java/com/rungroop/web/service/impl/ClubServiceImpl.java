@@ -10,7 +10,7 @@ import com.rungroop.web.repository.ClubRepository;
 import com.rungroop.web.service.ClubService;
 
 @Service
-public class ClubRepositoryImpl implements ClubService{
+public class ClubServiceImpl implements ClubService{
 
     @Autowired
     private ClubRepository clubRepository;
@@ -22,8 +22,8 @@ public class ClubRepositoryImpl implements ClubService{
     }
 
     @Override
-    public Club saveClub(Club club) {
-        return clubRepository.save(club);
+    public Club saveClub(ClubDto club) {
+        return clubRepository.save(mapToClub(club));
     }
 
     @Override
