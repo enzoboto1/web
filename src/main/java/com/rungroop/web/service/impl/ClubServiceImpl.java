@@ -43,8 +43,8 @@ public class ClubServiceImpl implements ClubService{
                         .title(club.getTitle())
                         .photoUrl(club.getPhotoUrl())
                         .content(club.getContent())
-                        .createOn(club.getCreateOn())
-                        .updateOn(club.getUpdateOn())
+                        .createdOn(club.getCreatedOn())
+                        .updatedOn(club.getUpdatedOn())
                         .build();
     }
 
@@ -54,8 +54,8 @@ public class ClubServiceImpl implements ClubService{
                         .title(club.getTitle())
                         .photoUrl(club.getPhotoUrl())
                         .content(club.getContent())
-                        .createOn(club.getCreateOn())
-                        .updateOn(club.getUpdateOn())
+                        .createdOn(club.getCreatedOn())
+                        .updatedOn(club.getUpdatedOn())
                         .build();
     }
     

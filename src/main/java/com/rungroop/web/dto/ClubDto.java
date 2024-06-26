@@ -19,6 +19,6 @@ public class ClubDto {
     private String photoUrl;
     @NotEmpty(message = "Conteúdo não pode ser vazio!")
     private String content;
-    private LocalDateTime createOn;
-    private LocalDateTime updateOn;
+    private LocalDateTime createdOn;
+    private LocalDateTime updatedOn;
 }

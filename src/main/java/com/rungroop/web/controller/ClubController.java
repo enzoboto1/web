@@ -39,6 +39,13 @@ public class ClubController {
         model.addAttribute("club", club);
         return "clubs-create";
     }
+
+    @GetMapping("/clubs/{clubId}")
+    public String clubDetail(@PathVariable("clubId") Long clubId, Model model) {
+        ClubDto clubDto = clubService.findClubById(clubId);
+        model.addAttribute("club", clubDto);
+        return "clubs-detail";
+    }
     
     @PostMapping("/clubs/new")
     public String saveClub(@ModelAttribute("club") @Valid ClubDto clubDto, BindingResult result, Model model) {
