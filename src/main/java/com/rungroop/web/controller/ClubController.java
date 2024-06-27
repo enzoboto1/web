@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ClubController {
@@ -79,5 +79,11 @@ public class ClubController {
         return "redirect:/clubs";
     }
     
+    @GetMapping("/clubs/search")
+    public String searchClub(@RequestParam("query") String query, Model model) {
+        List<ClubDto> clubsDto = clubService.searchClubs(query);
+        model.addAttribute("clubs", clubsDto);
+        return "clubs-list";
+    }
     
 }
