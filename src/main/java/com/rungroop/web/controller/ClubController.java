@@ -84,7 +84,6 @@ public class ClubController {
         List<ClubDto> clubsDto = clubService.searchClubs(query);
         model.addAttribute("clubs", clubsDto);
         return "clubs-list";
-     
     }
     
 }
