@@ -1,5 +1,7 @@
 package com.rungroop.web.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -20,6 +22,13 @@ public class EventController {
         this.eventService = eventService;
     } 
 
+    @GetMapping("/events")
+    public String listEvents(Model model) {
+        List<EventDto> events = eventService.findAllClubs();
+        model.addAttribute("events", events);
+        return "events-list";
+    }
+    
     @GetMapping("/events/{clubId}/new")
     public String createEventForm(@PathVariable("clubId") Long clubId, Model model) {
         Event event = new Event();
