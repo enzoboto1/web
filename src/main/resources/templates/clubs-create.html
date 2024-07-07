@@ -1,8 +1,5 @@
-<html
-    xmlns:th="http://thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout}"
->
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
 
 <head>
     <title>Club Create</title>
@@ -16,36 +13,21 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="title">Title</label>
-                            <input
-                                id="title"
-                                class="form-control"
-                                name="title"
-                                th:field="*{title}"
-                                placeholder="Title" 
+                            <input id="title" class="form-control" name="title" th:field="*{title}" placeholder="Title"
                                 type="text">
                             <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="photoUrl">Photo Url</label>
-                            <input
-                                id="photoUrl"
-                                class="form-control"
-                                name="photoUrl"
-                                th:field="*{photoUrl}"
-                                placeholder="Photo Url" 
-                                type="text">
+                            <input id="photoUrl" class="form-control" name="photoUrl" th:field="*{photoUrl}"
+                                placeholder="Photo Url" type="text">
                             <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
                         </div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="content">Content</label>
-                        <input
-                            id="content"
-                            class="form-control"
-                            name="content"
-                            th:field="*{content}"
-                            placeholder="1234 Main St" 
-                            type="text">
+                        <input id="content" class="form-control" name="content" th:field="*{content}"
+                            placeholder="1234 Main St" type="text">
                         <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
                     </div>
                     <button type="submit" class="btn btn-primary">Criar</button>
