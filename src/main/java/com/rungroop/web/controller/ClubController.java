@@ -34,11 +34,11 @@ public class ClubController {
         return "clubs-list";
     }
 
-    @GetMapping("/clubs/new")
-    public String createClubForm(Model model) {
-        Club club = new Club();
-        model.addAttribute("club", club);
-        return "clubs-create";
+    @GetMapping("/clubs/search")
+    public String searchClub(@RequestParam("query") String query, Model model) {
+        List<ClubDto> clubsDto = clubService.searchClubs(query);
+        model.addAttribute("clubs", clubsDto);
+        return "clubs-list";
     }
 
     @GetMapping("/clubs/{clubId}")
@@ -46,6 +46,13 @@ public class ClubController {
         ClubDto clubDto = clubService.findClubById(clubId);
         model.addAttribute("club", clubDto);
         return "clubs-detail";
+    }
+
+    @GetMapping("/clubs/new")
+    public String createClubForm(Model model) {
+        Club club = new Club();
+        model.addAttribute("club", club);
+        return "clubs-create";
     }
     
     @PostMapping("/clubs/new")
@@ -66,8 +73,11 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/{clubId}/edit")
-    public String updateClub(@PathVariable("clubId") Long clubId, @ModelAttribute("club") @Valid ClubDto clubDto, BindingResult result) {
-        if(result.hasErrors()) return "clubs-edit";
+    public String updateClub(@PathVariable("clubId") Long clubId, @ModelAttribute("club") @Valid ClubDto clubDto, Model model, BindingResult result) {
+        if(result.hasErrors()) {
+            model.addAttribute("club", clubDto);
+            return "clubs-edit";
+        }
         clubDto.setId(clubId);
         clubService.updateClub(clubDto);
         return "redirect:/clubs";
@@ -78,12 +88,5 @@ public class ClubController {
         clubService.removeClub(clubId);
         return "redirect:/clubs";
     }
-    
-    @GetMapping("/clubs/search")
-    public String searchClub(@RequestParam("query") String query, Model model) {
-        List<ClubDto> clubsDto = clubService.searchClubs(query);
-        model.addAttribute("clubs", clubsDto);
-        return "clubs-list";
-    }
-    
+
 }
