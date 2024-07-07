@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.rungroop.web.models.Club;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -24,4 +26,5 @@ public class EventDto {
     private String photoUrl;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private Club club;
 }
