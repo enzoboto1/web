@@ -9,4 +9,5 @@ public interface EventService {
     public List<EventDto> findAllClubs();
     public EventDto findEventById(long eventId);
     public void updateEvent(EventDto eventDto);
+    public void removeEvent(Long eventId);
 }
