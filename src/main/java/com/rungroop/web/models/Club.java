@@ -37,6 +37,7 @@ public class Club {
     @UpdateTimestamp
     private LocalDateTime updatedOn;
 
+    @Builder.Default
     @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
     private List<Event> events = new ArrayList<>();
 }
