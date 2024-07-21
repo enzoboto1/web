@@ -2,12 +2,15 @@ package com.rungroop.web.service.impl;
 
 import java.util.Arrays;
 
+import org.springframework.stereotype.Service;
+
 import com.rungroop.web.dto.RegistrationDto;
 import com.rungroop.web.models.UserEntity;
 import com.rungroop.web.repository.RoleRepository;
 import com.rungroop.web.repository.UserRepository;
 import com.rungroop.web.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private RoleRepository roleRepository;
@@ -27,6 +30,16 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(registrationDto.getPassword());
         userEntity.setRoles(Arrays.asList(roleRepository.findByName("USER")));
         userRepository.save(userEntity);
+    }
+
+    @Override
+    public UserEntity findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
     
 }
