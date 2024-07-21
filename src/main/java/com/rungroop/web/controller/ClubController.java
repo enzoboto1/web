@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ClubController {
     
-    private final ClubService clubService;
+    private ClubService clubService;
 
     public ClubController(ClubService clubService) {
         this.clubService = clubService;
