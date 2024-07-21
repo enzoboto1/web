@@ -22,12 +22,17 @@ public class AuthController {
     public AuthController(UserService userService) {
         this.userService = userService;
     }
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
     
     @GetMapping("/register")
     public String getRegisterForm(Model model) {
         RegistrationDto user = new RegistrationDto();
         model.addAttribute("user", user);
-        return "registration";
+        return "register";
     }
 
     @PostMapping("/register/save")
@@ -35,12 +40,12 @@ public class AuthController {
 
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
         if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
-            result.rejectValue("email", "Já existe um usuário com esse email/username");
+            return "redirect:/register?fail";
         }
 
         UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
         if(existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
-            result.rejectValue("username", "Já existe um usuário com esse email/username");
+            return "redirect:/register?fail";
         }
 
         if(result.hasErrors()) {
