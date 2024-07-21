@@ -1,5 +1,6 @@
 package com.rungroop.web.mapper;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import com.rungroop.web.dto.ClubDto;
@@ -27,7 +28,7 @@ public class ClubMapper {
                         .content(clubDto.getContent())
                         .createdOn(clubDto.getCreatedOn())
                         .updatedOn(clubDto.getUpdatedOn())
-                        .events(clubDto.getEvents().stream().map((eventDto) -> EventMapper.mapToEvent(eventDto)).collect(Collectors.toList()))
+                        .events(clubDto.getEvents() == null ? Collections.emptyList() : clubDto.getEvents().stream().map((eventDto) -> EventMapper.mapToEvent(eventDto)).collect(Collectors.toList()))
                         .build();
     }
 }
