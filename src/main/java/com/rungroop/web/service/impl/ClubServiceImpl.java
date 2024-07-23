@@ -2,19 +2,25 @@ package com.rungroop.web.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.mapper.ClubMapper;
 import com.rungroop.web.models.Club;
 import com.rungroop.web.repository.ClubRepository;
+import com.rungroop.web.repository.UserRepository;
+import com.rungroop.web.security.SecurityUtil;
 import com.rungroop.web.service.ClubService;
 
 @Service
 public class ClubServiceImpl implements ClubService{
 
-    @Autowired
     private ClubRepository clubRepository;
+    private UserRepository userRepository;
+
+    public ClubServiceImpl(ClubRepository clubRepository, UserRepository userRepository) {
+        this.clubRepository = clubRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<ClubDto> findAllClubs() {
@@ -24,6 +30,7 @@ public class ClubServiceImpl implements ClubService{
 
     @Override
     public Club saveClub(ClubDto club) {
+        club.setCreatedBy(userRepository.findByUsername(SecurityUtil.getSessionUser().getUsername()));
         return clubRepository.save(ClubMapper.mapToClub(club));
     }
 
@@ -35,6 +42,7 @@ public class ClubServiceImpl implements ClubService{
 
     @Override
     public void updateClub(ClubDto club) {
+        club.setCreatedBy(userRepository.findByUsername(SecurityUtil.getSessionUser().getUsername()));
         clubRepository.save(ClubMapper.mapToClub(club));
     }
 

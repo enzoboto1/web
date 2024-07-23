@@ -8,7 +8,7 @@ public interface ClubService {
     public List<ClubDto> findAllClubs();
     public Club saveClub(ClubDto clubDto);
     public ClubDto findClubById(Long clubId);
-    public void updateClub(ClubDto clubDto); 
+    public void updateClub(ClubDto clubDto);
     public void removeClub(Long clubId);
     public List<ClubDto> searchClubs(String query);
 }
