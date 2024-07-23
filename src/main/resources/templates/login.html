@@ -36,10 +36,10 @@
   <div class="main">
     <div class="col-md-6 col-sm-12">
       <div th:if="${param.error}" class="alert alert-success">
-        Invalid username and password.
+        Usuário ou senha inválidos.
       </div>
       <div th:if="${param.logout}" class="alert alert-success">
-        You have been logged out.</div>
+        Você foi desconectado.</div>
       <div class="login-form">
         <form method="post" th:action="@{/login}">
           <div class="form-group">
@@ -60,8 +60,8 @@
                     placeholder="Password"
                     name="password">
           </div>
-          <button th:href="@{/register}" type="submit" class="btn btn-black">Don't have an account? Register here.</button>
           <button type="submit" value="Log in" class="btn btn-secondary">Login</button>
+          <a th:href="@{/register}" class="btn btn-black">Não possui cadastro? Clique aqui.</a>
         </form>
       </div>
     </div>

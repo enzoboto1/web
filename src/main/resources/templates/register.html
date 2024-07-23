@@ -67,8 +67,8 @@
                                     th:field="*{password}">
                         </div>
                         <p th:if="${#fields.hasErrors('password')}" class="text-danger"></p>
-                        <button th:href="@{/login}" type="submit" class="btn btn-black">Login</button>
                         <button th:href="@{/register}" type="submit" class="btn btn-secondary">Registrar</button>
+                        <button th:href="@{/login}" type="submit" class="btn btn-black">Login</button>
                     </form>
                 </div>
             </div>
