@@ -3,6 +3,8 @@ package com.rungroop.web.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.rungroop.web.models.UserEntity;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
@@ -22,5 +24,6 @@ public class ClubDto {
     private String content;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private UserEntity createdBy;
     private List<EventDto> events;
 }

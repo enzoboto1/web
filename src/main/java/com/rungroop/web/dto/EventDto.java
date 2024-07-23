@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.rungroop.web.models.Club;
-
 import java.time.LocalDateTime;
 
 @Data
