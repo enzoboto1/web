@@ -2,8 +2,11 @@ package com.rungroop.web.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -11,21 +14,39 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/login", "/register/**", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/login", "/register", "/clubs/**", "/events/**", "/css/**", "/js/**").authenticated())
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/clubs")
-                        .loginProcessingUrl("/login")
-                        .failureUrl("/login?error=true")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
+        private final CustomUserDetailsService userDetailsService;
 
-        return http.build();
-    }
+        public SecurityConfig(CustomUserDetailsService userDetailsService) {
+                this.userDetailsService = userDetailsService;
+        }
+
+        @Bean
+        public static PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
+
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                http.csrf(csrf -> csrf.disable())
+                                .authorizeHttpRequests(requests -> requests
+                                                .requestMatchers("/login/**", "/register/**", "/css/**", "/js/**")
+                                                .permitAll()
+                                                .anyRequest()
+                                                .authenticated())
+                                .formLogin(form -> form
+                                                .loginPage("/login")
+                                                .defaultSuccessUrl("/clubs")
+                                                .loginProcessingUrl("/login")
+                                                .failureUrl("/login?error=true")
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                                .permitAll());
+
+                return http.build();
+        }
+
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+                auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        }
 }
